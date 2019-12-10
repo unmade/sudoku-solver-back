@@ -39,7 +39,7 @@ class PencilMarking(Technique):
             BulkPencilMarking,
             techniques.NakedPair,
             techniques.NakedTriplet,
-            techniques.Omission,
+            techniques.LockedCandidate,
             techniques.XYWing,
             techniques.UniqueRectangle,
         )
@@ -55,7 +55,7 @@ def steps(sudoku: Sudoku, with_pencil_marking: bool = False) -> Iterator[Result]
         techniques.HiddenSingle,
         techniques.NakedPair,
         techniques.NakedTriplet,
-        techniques.Omission,
+        techniques.LockedCandidate,
         techniques.XYWing,
         techniques.UniqueRectangle,
     )
