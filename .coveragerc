@@ -1,0 +1,14 @@
+[paths]
+source =
+   solvesudoku
+
+[run]
+branch = true
+source =
+    solvesudoku
+    tests
+parallel = true
+
+[report]
+show_missing = true
+omit = *__main__*

@@ -5,7 +5,9 @@
 #    pip-compile
 #
 asgiref==3.2.3            # via django
+django-cors-headers==3.2.0
 django==3.0
 djangorestframework==3.10.3
+git+https://github.com/unmade/dokusan@develop
 pytz==2019.3              # via django
 sqlparse==0.3.0           # via django

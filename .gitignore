@@ -1,10 +1,15 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
 *.py[cod]
 *$py.class
 
-# Environments
 .venv
+*.sqlite3
 
-# Test database
-db.sqlite3
+__pycache__/
+.cache
+.pytest_cache
+.mypy_cache
+
+.coverage
+coverage.*
+
+test-reports
