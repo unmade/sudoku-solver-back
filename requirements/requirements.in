@@ -1,4 +1,5 @@
 Django
 django-cors-headers
+django-environ
 djangorestframework
-git+https://github.com/unmade/dokusan@develop
+dokusan
