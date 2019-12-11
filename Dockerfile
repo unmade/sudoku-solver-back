@@ -8,17 +8,6 @@ COPY requirements/requirements.txt ${HOME}/requirements/
 COPY requirements/prod-requirements.txt ${HOME}/requirements/
 RUN pip install -r requirements/requirements.txt -r requirements/prod-requirements.txt
 
-ARG django_allowed_hosts
-ENV DJANGO_ALLOWED_HOSTS $django_allowed_hosts
-
-ARG django_cors_origin_whitelist
-ENV DJANGO_CORS_ORIGIN_WHITELIST $django_cors_origin_whitelist
-
-ARG django_secret_key
-ENV DJANGO_SECRET_KEY $django_secret_key
-
-ENV DJANGO_SETTINGS_MODULE=solvesudoku.settings
-
 WORKDIR ${HOME_DIR}
 
 COPY . ${HOME_DIR}
