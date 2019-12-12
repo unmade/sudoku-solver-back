@@ -1,4 +1,4 @@
-name: Build and Publish Docker
+name: Deploy to Heroku
 
 on:
     push:
@@ -11,9 +11,20 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Build and Publish to Docker Hub
+      id: publish_image
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: fdooch/sudoku-solver-back
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         tag_names: true
+    - name: Deploy to Heroku
+      env:
+        DOCKER_TAG: ${{ steps.publish_image.outputs.tag }}
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+      run: |
+        docker login --username=_ --password=${HEROKU_API_KEY} registry.heroku.com
+        docker tag ${DOCKER_TAG} registry.heroku.com/${HEROKU_APP_NAME}/web
+        docker push registry.heroku.com/${HEROKU_APP_NAME}/web
+        heroku container:release web --app ${HEROKU_APP_NAME}
