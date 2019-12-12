@@ -1,0 +1,44 @@
+name: Deploy to Heroku
+
+on:
+    push:
+      tags:
+        - '[0-2].[0-9]+.[0-9]+*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Extract tag name
+      id: tag_name
+      run: |
+        echo ::set-output name=TAG::${GITHUB_REF/refs\/tags\//}
+
+    - name: Build Docker image
+      env:
+        TAG: ${{ steps.tag_name.outputs.TAG }}
+      run: |
+        docker build . -t fdooch/sudoku-solver-back:${TAG}
+
+    - name: Log in to the Heroku registry
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        echo "${HEROKU_API_KEY}" | docker login --username=_ --password-stdin registry.heroku.com
+
+    - name: Push image to the Heroku registry
+      env:
+        TAG: ${{ steps.tag_name.outputs.TAG }}
+        HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+      run: |
+        docker tag fdooch/sudoku-solver-back:${TAG} registry.heroku.com/${HEROKU_APP_NAME}/web
+        docker push registry.heroku.com/${HEROKU_APP_NAME}/web
+
+    - name: Deploy
+      env:
+        HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        heroku container:release web --app ${HEROKU_APP_NAME}
