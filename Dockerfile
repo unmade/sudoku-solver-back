@@ -14,4 +14,4 @@ COPY . ${HOME_DIR}
 
 EXPOSE 8000
 
-CMD ["gunicorn", "--access-logfile=-", "--error-logfile=-", "--workers=2", "--bind=0.0.0.0:8000", "solvesudoku.wsgi:application"]
+CMD ["gunicorn", "solvesudoku.wsgi:application","--config", "gunicorn_conf.py"]
