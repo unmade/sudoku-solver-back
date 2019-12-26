@@ -5,7 +5,7 @@ from sudoku import views
 
 @pytest.mark.django_db
 def test_daily_sudoku(rf, sudoku_factory):
-    sudoku_factory(is_daily=True)
+    sudoku_factory.create_batch(2, is_daily=True)
     url = reverse("daily-sudoku")
 
     request = rf.get(url)
