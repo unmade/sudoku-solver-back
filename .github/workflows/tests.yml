@@ -29,6 +29,11 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+
     - name: Cache pip dependencies
       uses: actions/cache@v1
       with:
@@ -47,5 +52,6 @@ jobs:
         DJANGO_DEBUG: 0
         DJANGO_DATABASE_URL: "psql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
         DJANGO_SECRET_KEY: keep_it_secret
+        PYTHONPATH: solvesudoku
       run: |
         pytest --cov
