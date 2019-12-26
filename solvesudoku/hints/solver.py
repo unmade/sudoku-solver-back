@@ -1,12 +1,8 @@
 from typing import Iterator, List, Tuple, Type
 
-from dokusan import techniques
+from dokusan import exceptions, techniques
 from dokusan.entities import Cell, Sudoku
-from dokusan.techniques import Combination, Result, Technique
-
-
-class Unsolvable(Exception):
-    pass
+from dokusan.techniques import Combination, Step, Technique
 
 
 class BulkPencilMarking(techniques.PencilMarking):
@@ -34,7 +30,9 @@ class PencilMarking(Technique):
         ]
 
     def _get_correct_cells(self) -> List[Cell]:
-        sudoku = Sudoku(*[c for c in self.sudoku.cells() if c.value])
+        sudoku = Sudoku(
+            *[c for c in self.sudoku.cells() if c.value], box_size=self.sudoku.box_size
+        )
         all_techniques = (
             BulkPencilMarking,
             techniques.NakedPair,
@@ -49,7 +47,7 @@ class PencilMarking(Technique):
         return [cell for cell in sudoku.cells() if cell.candidates]
 
 
-def steps(sudoku: Sudoku, with_pencil_marking: bool = False) -> Iterator[Result]:
+def steps(sudoku: Sudoku, with_pencil_marking: bool = False) -> Iterator[Step]:
     all_techniques: Tuple[Type[Technique], ...] = (
         techniques.LoneSingle,
         techniques.HiddenSingle,
@@ -72,4 +70,5 @@ def steps(sudoku: Sudoku, with_pencil_marking: bool = False) -> Iterator[Result]
                 sudoku.update(result.changes)
                 yield result
                 break
-        raise Unsolvable()
+        else:
+            raise exceptions.Unsolvable
