@@ -6,7 +6,11 @@ ENV PYTHONPATH="${HOME_DIR}/solvesudoku"
 
 COPY ./requirements/requirements.txt ${HOME}/requirements/
 COPY ./requirements/prod-requirements.txt ${HOME}/requirements/
-RUN pip install -r requirements/requirements.txt -r requirements/prod-requirements.txt
+
+RUN pip install -r requirements/requirements.txt
+RUN apk add --no-cache --virtual .build-deps gcc libc-dev postgresql-dev \
+    && pip install -r requirements/prod-requirements.txt \
+    && apk del .build-deps gcc libc-dev postgresql-dev
 
 WORKDIR ${HOME_DIR}
 
