@@ -6,7 +6,6 @@ source =
 branch = true
 source =
     solvesudoku
-    tests
 parallel = true
 
 [report]
