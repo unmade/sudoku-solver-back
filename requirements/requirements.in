@@ -5,3 +5,4 @@ django-filter
 djangorestframework
 dokusan
 sentry-sdk
+whitenoise
