@@ -8,9 +8,8 @@ COPY ./requirements/prod-requirements.txt ${HOME}/requirements/
 
 RUN pip install -r requirements/requirements.txt
 
-ENV PG_VERSION 11.6
-RUN apk add --no-cache --virtual .build-deps gcc libc-dev postgresql-dev~=${PG_VERSION} \
-    && apk add --no-cache postgresql-client~=${PG_VERSION} \
+RUN apk add --no-cache --virtual .build-deps gcc libc-dev postgresql-dev \
+    && apk add --no-cache postgresql-client \
     && pip install -r requirements/prod-requirements.txt \
     && apk del .build-deps gcc libc-dev postgresql-dev
 
