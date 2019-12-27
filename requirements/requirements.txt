@@ -16,3 +16,4 @@ pytz==2019.3              # via django
 sentry-sdk==0.13.5
 sqlparse==0.3.0           # via django
 urllib3==1.25.7           # via sentry-sdk
+whitenoise==5.0.1

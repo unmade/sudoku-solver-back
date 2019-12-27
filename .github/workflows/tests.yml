@@ -66,4 +66,5 @@ jobs:
         DJANGO_SECRET_KEY: keep_it_secret
         PYTHONPATH: solvesudoku
       run: |
+        python manage.py collectstatic --noinput
         pytest --cov
