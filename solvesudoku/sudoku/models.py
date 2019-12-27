@@ -30,3 +30,6 @@ class Sudoku(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
     objects = SudokuQuerySet.as_manager()
+
+    class Meta:
+        verbose_name_plural = "Sudoku"
