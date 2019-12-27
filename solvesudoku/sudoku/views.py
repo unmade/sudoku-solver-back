@@ -1,5 +1,6 @@
 from dokusan.entities import BoxSize
 from dokusan.entities import Sudoku as SudokuGrid
+
 from rest_framework import exceptions, generics
 
 from .filters import RandomSudokuFilter

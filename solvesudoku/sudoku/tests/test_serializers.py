@@ -1,4 +1,5 @@
 from dokusan.entities import Sudoku
+
 from sudoku.serializers import SudokuSerializer
 
 

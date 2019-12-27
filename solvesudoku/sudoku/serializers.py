@@ -1,4 +1,5 @@
 from dokusan.entities import BoxSize, Cell, Position, Sudoku
+
 from rest_framework import serializers
 
 
