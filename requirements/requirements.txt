@@ -5,6 +5,7 @@
 #    pip-compile requirements/requirements.in
 #
 asgiref==3.2.3            # via django
+certifi==2019.11.28       # via sentry-sdk
 django-cors-headers==3.2.0
 django-environ==0.4.5
 django-filter==2.2.0
@@ -12,4 +13,6 @@ django==3.0
 djangorestframework==3.10.3
 dokusan==0.1.0a5
 pytz==2019.3              # via django
+sentry-sdk==0.13.5
 sqlparse==0.3.0           # via django
+urllib3==1.25.7           # via sentry-sdk

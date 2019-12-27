@@ -15,6 +15,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 import environ
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 env = environ.Env()
 
@@ -150,3 +152,16 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
 }
+
+
+# Sentry
+# https://docs.sentry.io/platforms/python/django/
+
+SENTRY_DSN = env("SENTRY_DSN", default=None)
+
+sentry_sdk.init(
+    dsn=SENTRY_DSN,
+    integrations=[
+        DjangoIntegration(),
+    ],
+)
