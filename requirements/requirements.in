@@ -4,3 +4,4 @@ django-environ
 django-filter
 djangorestframework
 dokusan
+sentry-sdk
