@@ -7,10 +7,10 @@ from dokusan.entities import Sudoku
 def random_sudoku(avg_rank: int = 150) -> Tuple[Sudoku, int]:
     while True:
         sudoku = generators.random_sudoku(avg_rank)
-        rank = stats.rank(sudoku)
-        try:
-            list(solvers.steps(sudoku))
-        except exceptions.Unsolvable:
-            continue
-        else:
-            return sudoku, rank
+        if (rank := stats.rank(sudoku)) >= avg_rank:
+            try:
+                list(solvers.steps(sudoku))
+            except exceptions.Unsolvable:
+                continue
+            else:
+                return sudoku, rank
