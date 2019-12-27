@@ -1,7 +1,9 @@
 import json
 
 import pytest
+
 from django.urls import reverse
+
 from sudoku import serializers, views
 
 

@@ -13,9 +13,6 @@ repos:
     rev: v4.3.21
     hooks:
     -   id: isort
-        additional_dependencies:
-            - pipreqs
-            - pip-api
 -   repo: https://github.com/PyCQA/flake8
     rev: 3.7.9
     hooks:

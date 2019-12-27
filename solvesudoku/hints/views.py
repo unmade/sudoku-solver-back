@@ -1,5 +1,8 @@
+import dokusan.exceptions
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from sudoku.serializers import SudokuSerializer
 
 from . import exceptions, solver
@@ -17,6 +20,6 @@ class Hints(APIView):
         try:
             for step in solver.steps(sudoku, with_pencil_marking=with_pencil_marking):
                 return Response(HintSerializer(step).data)
-        except solver.Unsolvable as exc:
+        except dokusan.exceptions.Unsolvable as exc:
             raise exceptions.InvalidPuzzle from exc
         raise exceptions.PuzzleSolved

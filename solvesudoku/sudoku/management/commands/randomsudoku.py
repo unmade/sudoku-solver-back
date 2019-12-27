@@ -1,5 +1,7 @@
-from django.core.management.base import BaseCommand
 from dokusan import stats
+
+from django.core.management.base import BaseCommand
+
 from sudoku.models import Sudoku
 
 from . import _generators
