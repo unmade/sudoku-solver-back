@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     "corsheaders",
+    'django_filters',
     "rest_framework",
 
     "sudoku",
@@ -139,3 +140,13 @@ STATIC_URL = '/static/'
 # https://github.com/adamchainz/django-cors-headers
 
 CORS_ORIGIN_WHITELIST = env.list('DJANGO_CORS_ORIGIN_WHITELIST', default=[])
+
+
+# Rest framework settings
+# https://www.django-rest-framework.org/api-guide/settings/
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+}

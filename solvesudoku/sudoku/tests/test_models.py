@@ -21,11 +21,7 @@ def test_sudoku_random_empty_db():
 
 @pytest.mark.django_db
 def test_sudoku_random(sudoku_factory):
-    sudoku_factory.create_batch(10)
+    sudoku_factory.create(id=1)
+    sudoku_factory.create(id=50)
+    sudoku_factory.create(id=100)
     assert isinstance(Sudoku.objects.random(), Sudoku)
-
-
-@pytest.mark.django_db
-def test_sudoku_random_is_random_each_time(sudoku_factory):
-    sudoku_factory.create_batch(40)
-    assert Sudoku.objects.random() != Sudoku.objects.random()
