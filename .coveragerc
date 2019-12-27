@@ -10,4 +10,6 @@ parallel = true
 
 [report]
 show_missing = true
-omit = *__main__*
+omit =
+    **/apps.py
+    **/wsgi.py

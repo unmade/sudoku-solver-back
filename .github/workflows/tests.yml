@@ -12,7 +12,7 @@ on:
 
 
 jobs:
-  build:
+  lint-and-test:
     runs-on: ubuntu-latest
 
     services:
