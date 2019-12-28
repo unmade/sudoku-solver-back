@@ -1,7 +1,7 @@
 from typing import Iterator, List, Tuple, Type
 
 from dokusan import exceptions, techniques
-from dokusan.entities import Cell, Sudoku
+from dokusan.boards import Cell, Sudoku
 from dokusan.techniques import Combination, Step, Technique
 
 

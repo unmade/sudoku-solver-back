@@ -1,4 +1,4 @@
-from dokusan.entities import Sudoku
+from dokusan.boards import Sudoku
 
 from sudoku.serializers import SudokuSerializer
 

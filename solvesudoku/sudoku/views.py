@@ -1,5 +1,5 @@
-from dokusan.entities import BoxSize
-from dokusan.entities import Sudoku as SudokuGrid
+from dokusan.boards import BoxSize
+from dokusan.boards import Sudoku as SudokuGrid
 
 from rest_framework import exceptions, generics
 

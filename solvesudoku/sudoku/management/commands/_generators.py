@@ -1,7 +1,7 @@
 from typing import Tuple
 
 from dokusan import exceptions, generators, solvers, stats
-from dokusan.entities import Sudoku
+from dokusan.boards import Sudoku
 
 
 def random_sudoku(avg_rank: int = 150) -> Tuple[Sudoku, int]:

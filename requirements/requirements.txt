@@ -11,7 +11,7 @@ django-environ==0.4.5
 django-filter==2.2.0
 django==3.0
 djangorestframework==3.10.3
-dokusan==0.1.0a5
+dokusan==0.1.0a6
 pytz==2019.3              # via django
 sentry-sdk==0.13.5
 sqlparse==0.3.0           # via django
