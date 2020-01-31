@@ -16,7 +16,7 @@ class Hints(APIView):
         sudoku = sudoku_serializer.save()
         if not sudoku.is_valid():
             raise exceptions.InvalidPuzzle
-        with_pencil_marking = request.query_params["with_pencil_marks"] == "true"
+        with_pencil_marking = request.query_params.get("with_pencil_marks") == "true"
         try:
             for step in solver.steps(sudoku, with_pencil_marking=with_pencil_marking):
                 return Response(HintSerializer(step).data)
