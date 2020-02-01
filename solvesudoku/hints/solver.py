@@ -63,12 +63,8 @@ def steps(sudoku: Sudoku, with_pencil_marking: bool = False) -> Iterator[Step]:
     while not sudoku.is_solved():
         for technique in all_techniques:
             try:
-                result = technique(sudoku).first()
+                yield technique(sudoku).first()
             except techniques.NotFound:
                 continue
-            else:
-                sudoku.update(result.changes)
-                yield result
-                break
         else:
             raise exceptions.Unsolvable
