@@ -16,10 +16,13 @@ class Hints(APIView):
         sudoku = sudoku_serializer.save()
         if not sudoku.is_valid():
             raise exceptions.InvalidPuzzle
+
         with_pencil_marking = request.query_params.get("with_pencil_marks") == "true"
         try:
-            for step in solver.steps(sudoku, with_pencil_marking=with_pencil_marking):
-                return Response(HintSerializer(step).data)
+            step = solver.step(sudoku, with_pencil_marking=with_pencil_marking)
         except dokusan.exceptions.Unsolvable as exc:
             raise exceptions.InvalidPuzzle from exc
-        raise exceptions.PuzzleSolved
+        except solver.Solved as exc:
+            raise exceptions.PuzzleSolved from exc
+
+        return Response(HintSerializer(step).data)

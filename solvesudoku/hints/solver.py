@@ -5,6 +5,10 @@ from dokusan.boards import Cell, Sudoku
 from dokusan.techniques import Combination, Step, Technique
 
 
+class Solved(Exception):
+    pass
+
+
 class BulkPencilMarking(techniques.PencilMarking):
     def _find(self) -> Iterator[Combination]:
         yield techniques.Combination(name="Pencil Marking", cells=[], values=[])
@@ -47,7 +51,7 @@ class PencilMarking(Technique):
         return [cell for cell in sudoku.cells() if cell.candidates]
 
 
-def steps(sudoku: Sudoku, with_pencil_marking: bool = False) -> Iterator[Step]:
+def step(sudoku: Sudoku, with_pencil_marking: bool = False) -> Step:
     all_techniques: Tuple[Type[Technique], ...] = (
         techniques.LoneSingle,
         techniques.HiddenSingle,
@@ -60,15 +64,12 @@ def steps(sudoku: Sudoku, with_pencil_marking: bool = False) -> Iterator[Step]:
     if with_pencil_marking:
         all_techniques = (BulkPencilMarking, PencilMarking) + all_techniques
 
-    while not sudoku.is_solved():
-        for technique in all_techniques:
-            try:
-                result = technique(sudoku).first()
-            except techniques.NotFound:
-                continue
-            else:
-                sudoku.update(result.changes)
-                yield result
-                break
-        else:
-            raise exceptions.Unsolvable
+    if sudoku.is_solved():
+        raise Solved
+
+    for technique in all_techniques:
+        try:
+            return technique(sudoku).first()
+        except techniques.NotFound:
+            continue
+    raise exceptions.Unsolvable
