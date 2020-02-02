@@ -53,7 +53,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements/requirements.txt -r requirements/prod-requirements.txt -r requirements/dev-requirements.txt
+        pip install \
+          -r requirements/requirements.txt \
+          -r requirements/prod-requirements.txt \
+          -r requirements/ci-requirements.txt \
+          -r requirements/dev-requirements.txt
 
     - name: Run Linters
       run: |
@@ -68,3 +72,10 @@ jobs:
       run: |
         python manage.py collectstatic --noinput
         pytest --cov
+
+    - name: Send coverage report
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      run: |
+        coverage xml
+        codecov

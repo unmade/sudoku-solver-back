@@ -1,5 +1,8 @@
 # Sudoku Solver
 
+[![build](https://github.com/unmade/sudoku-solver-back/workflows/Lint%20and%20Test/badge.svg)](https://github.com/unmade/sudoku-solver-back/blob/master/.github/workflows/tests.yml)
+[![codecov](https://codecov.io/gh/unmade/sudoku-solver-back/branch/master/graph/badge.svg)](https://codecov.io/gh/unmade/sudoku-solver-back)
+
 This is backend application for a step-by-step sudoku solver project
 
 ## Development
