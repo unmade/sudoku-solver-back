@@ -5,6 +5,7 @@ admin.autodiscover()
 
 urlpatterns = [
     path("shelter/", admin.site.urls),
+    path("api/auth", include("authentication.urls")),
     path("api/sudoku", include("sudoku.urls")),
     path("api/hints", include("hints.urls")),
 ]

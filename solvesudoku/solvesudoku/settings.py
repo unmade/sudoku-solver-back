@@ -52,9 +52,12 @@ INSTALLED_APPS = [
     "corsheaders",
     'django_filters',
     "rest_framework",
+    'rest_social_auth',
+    'social_django',
 
-    "sudoku",
+    "authentication",
     "hints",
+    "sudoku",
 ]
 
 MIDDLEWARE = [
@@ -99,6 +102,21 @@ DATABASES = {
         default=f'sqlite:////{os.path.join(BASE_DIR, "db.sqlite3")}',
     ),
 }
+
+
+# User model
+# https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#substituting-a-custom-user-model
+
+AUTH_USER_MODEL = 'authentication.User'
+
+
+# Authentiaction backends
+# https://docs.djangoproject.com/en/2.0/ref/settings/#authentication-backends
+
+AUTHENTICATION_BACKENDS = (
+    'authentication.backends.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 
 # Password validation
@@ -154,6 +172,11 @@ CORS_ORIGIN_WHITELIST = env.list('DJANGO_CORS_ORIGIN_WHITELIST', default=[])
 # https://www.django-rest-framework.org/api-guide/settings/
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
@@ -171,3 +194,11 @@ sentry_sdk.init(
         DjangoIntegration(),
     ],
 )
+
+
+# python-social-auth
+# http://python-social-auth.readthedocs.io/en/latest/index.html
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_POSTGRES_JSONFIELD = env.bool('SOCIAL_AUTH_POSTGRES_JSONFIELD', False)

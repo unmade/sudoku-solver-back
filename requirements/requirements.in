@@ -3,6 +3,8 @@ django-cors-headers
 django-environ
 django-filter
 djangorestframework
+djangorestframework-simplejwt
 dokusan
 sentry-sdk
+rest-social-auth
 whitenoise
