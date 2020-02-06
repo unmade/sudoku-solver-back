@@ -21,6 +21,7 @@ repos:
             '-e', 'git+https://github.com/pycqa/pyflakes@master#egg=pyflakes',
             '-e', 'git+https://github.com/pycqa/pycodestyle@master#egg=pycodestyle',
         ]
+        exclude: 'migrations/'
 -   repo: local
     hooks:
       - id: mypy

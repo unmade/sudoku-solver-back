@@ -52,9 +52,13 @@ INSTALLED_APPS = [
     "corsheaders",
     'django_filters',
     "rest_framework",
+    'rest_social_auth',
+    'social_django',
 
-    "sudoku",
+    "authentication",
     "hints",
+    "profiles",
+    "sudoku",
 ]
 
 MIDDLEWARE = [
@@ -99,6 +103,21 @@ DATABASES = {
         default=f'sqlite:////{os.path.join(BASE_DIR, "db.sqlite3")}',
     ),
 }
+
+
+# User model
+# https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#substituting-a-custom-user-model
+
+AUTH_USER_MODEL = 'authentication.User'
+
+
+# Authentiaction backends
+# https://docs.djangoproject.com/en/2.0/ref/settings/#authentication-backends
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 
 # Password validation
@@ -154,6 +173,11 @@ CORS_ORIGIN_WHITELIST = env.list('DJANGO_CORS_ORIGIN_WHITELIST', default=[])
 # https://www.django-rest-framework.org/api-guide/settings/
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
@@ -170,4 +194,24 @@ sentry_sdk.init(
     integrations=[
         DjangoIntegration(),
     ],
+)
+
+
+# python-social-auth
+# http://python-social-auth.readthedocs.io/en/latest/index.html
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_POSTGRES_JSONFIELD = env.bool('SOCIAL_AUTH_POSTGRES_JSONFIELD', False)
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'authentication.pipelines.update_profile_details',
 )

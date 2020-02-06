@@ -1,6 +1,7 @@
 import json
 
 from dokusan import generators, solvers, techniques
+from dokusan.boards import Cell, Position
 
 from django.urls import reverse
 
@@ -49,8 +50,12 @@ def test_returns_hint_for_sudoku_with_pencil_marks(rf):
 def test_hint_for_invalid_sudoku(rf):
     sudoku = generators.random_sudoku(avg_rank=1)
     sudoku.update(techniques.BulkPencilMarking(sudoku).first().changes)
-    sudoku[0, 0].value = 1
-    sudoku[0, 1].value = 1
+    sudoku.update(
+        [
+            Cell(position=Position(0, 0, 0), value=1),
+            Cell(position=Position(0, 1, 0), value=1),
+        ]
+    )
 
     url = reverse("hint")
     serializer = serializers.SudokuSerializer(sudoku)

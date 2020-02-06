@@ -69,6 +69,8 @@ jobs:
         DJANGO_DATABASE_URL: "psql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
         DJANGO_SECRET_KEY: keep_it_secret
         PYTHONPATH: solvesudoku
+        SOCIAL_AUTH_GOOGLE_OAUTH2_KEY: google_oauth2_secret_key
+        SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET: google_oauth2_secret
       run: |
         python manage.py collectstatic --noinput
         pytest --cov
