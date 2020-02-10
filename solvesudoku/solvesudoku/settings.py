@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 # fmt: off
 
 import os
+from datetime import timedelta
 
 import environ
 import sentry_sdk
@@ -215,3 +216,13 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_by_email',
     'authentication.pipelines.update_profile_details',
 )
+
+
+# django-rest-framework-simplejwt
+# https://github.com/davesque/django-rest-framework-simplejwt
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(
+        minutes=env.int('JWT_ACCESS_TOKEN_LIFETIME_IN_MINUTES', default=5)
+    ),
+}
