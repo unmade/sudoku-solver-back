@@ -4,33 +4,73 @@
 #
 #    pip-compile requirements/dev-requirements.in
 #
-aspy.yaml==1.3.0          # via pre-commit
-attrs==19.3.0             # via pytest
-cfgv==2.0.1               # via pre-commit
-coverage==5.0.3           # via pytest-cov
-factory-boy==2.12.0       # via pytest-factoryboy
-faker==4.0.0              # via factory-boy
-identify==1.4.11          # via pre-commit
-inflection==0.3.1         # via pytest-factoryboy
-more-itertools==8.2.0     # via pytest
-mypy-extensions==0.4.3    # via mypy
+aspy.yaml==1.3.0
+    # via pre-commit
+attrs==19.3.0
+    # via pytest
+cfgv==2.0.1
+    # via pre-commit
+coverage==5.0.3
+    # via pytest-cov
+factory-boy==2.12.0
+    # via pytest-factoryboy
+faker==4.0.0
+    # via factory-boy
+identify==1.4.11
+    # via pre-commit
+inflection==0.3.1
+    # via pytest-factoryboy
+more-itertools==8.2.0
+    # via pytest
+mypy-extensions==0.4.3
+    # via mypy
 mypy==0.761
-nodeenv==1.3.4            # via pre-commit
-packaging==20.1           # via pytest
-pluggy==0.13.1            # via pytest
+    # via -r dev-requirements.in
+nodeenv==1.3.4
+    # via pre-commit
+packaging==20.1
+    # via pytest
+pluggy==0.13.1
+    # via pytest
 pre-commit==2.0.1
-py==1.8.1                 # via pytest
-pyparsing==2.4.6          # via packaging
+    # via -r dev-requirements.in
+py==1.8.1
+    # via pytest
+pyparsing==2.4.6
+    # via packaging
 pytest-cov==2.8.1
+    # via -r dev-requirements.in
 pytest-django==3.8.0
+    # via -r dev-requirements.in
 pytest-factoryboy==2.0.3
+    # via -r dev-requirements.in
 pytest==5.3.5
-python-dateutil==2.8.1    # via faker
-pyyaml==5.3               # via aspy.yaml, pre-commit
-six==1.14.0               # via cfgv, packaging, python-dateutil
-text-unidecode==1.3       # via faker
-toml==0.10.0              # via pre-commit
-typed-ast==1.4.1          # via mypy
-typing-extensions==3.7.4.1  # via mypy
-virtualenv==16.7.9        # via pre-commit
-wcwidth==0.1.8            # via pytest
+    # via
+    #   -r dev-requirements.in
+    #   pytest-cov
+    #   pytest-django
+    #   pytest-factoryboy
+python-dateutil==2.8.1
+    # via faker
+pyyaml==5.4
+    # via
+    #   aspy.yaml
+    #   pre-commit
+six==1.14.0
+    # via
+    #   -c requirements.txt
+    #   cfgv
+    #   packaging
+    #   python-dateutil
+text-unidecode==1.3
+    # via faker
+toml==0.10.0
+    # via pre-commit
+typed-ast==1.4.1
+    # via mypy
+typing-extensions==3.7.4.1
+    # via mypy
+virtualenv==16.7.9
+    # via pre-commit
+wcwidth==0.1.8
+    # via pytest
